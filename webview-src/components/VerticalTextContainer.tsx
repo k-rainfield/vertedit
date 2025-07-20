@@ -1,6 +1,4 @@
-///** @_jsx h */
 /** @jsxImportSource preact */
-//import { h } from 'preact';
 import { useRef, useEffect, useCallback } from 'preact/hooks';
 import { processTextForVerticalDisplay } from './processTextForVerticalDisplay';
 

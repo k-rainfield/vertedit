@@ -1,6 +1,5 @@
-///** @_jsx h */
 /** @jsxImportSource preact */
-import { render/*, h*/ } from 'preact';
+import { render } from 'preact';
 import { TategakiEditor } from './components/TategakiEditor';
 import './styles.css';
 

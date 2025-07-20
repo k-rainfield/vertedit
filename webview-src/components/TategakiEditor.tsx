@@ -1,6 +1,4 @@
-///** @_jsx h */
 /** @jsxImportSource preact */
-//import { h } from 'preact';
 import { useState, useEffect, useRef } from 'preact/hooks';
 import { SaveIndicator } from './SaveIndicator';
 import { VerticalTextContainer } from './VerticalTextContainer';

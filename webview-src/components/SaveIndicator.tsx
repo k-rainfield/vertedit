@@ -1,6 +1,4 @@
-///** @_jsx h */
 /** @jsxImportSource preact */
-//import { h } from 'preact';
 
 interface SaveIndicatorProps {
   status: 'idle' | 'unsaved' | 'saving' | 'saved' | 'error';
