@@ -7,9 +7,7 @@ describe('SaveIndicator', () => {
   test('shows "未保存" and unsaved color', () => {
     render(<SaveIndicator status="unsaved" />);
     expect(screen.getByText('未保存')).toBeInTheDocument();
-    expect(screen.getByText('未保存')).toHaveStyle({color: '#d73a49'});
-//    expect(colorButton).toHaveStyle({backgroundColor: 'red'})
-    
+    expect(screen.getByText('未保存')).toHaveStyle({color: '#d73a49'});    
   });
 
   test('shows "保存中..." and saving color', () => {
