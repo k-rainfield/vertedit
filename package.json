@@ -1,0 +1,129 @@
+{
+  "name": "vertedit",
+  "displayName": "VertEdit",
+  "description": "A VS Code extension for WYSIWYG vertical text editing",
+  "version": "0.1.0",
+  "publisher": "k.rainfield",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/k-rainfield/vertedit.git"
+  },
+
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "vertical",
+    "text",
+    "wysiwyg",
+    "editor"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onLanguage:plaintext"
+  ],  
+  "contributes": {
+    "commands": [
+      {
+        "command": "tategaki.openVerticalView",
+        "title": "Open in WYSIWYG Vertical Editor",
+        "icon": "$(book)",
+        "category": "Tategaki"
+      },
+      {
+        "command": "tategaki.save",
+        "title": "Save Tategaki Content",
+        "icon": "$(save)",
+        "category": "Tategaki"
+      },
+      {
+        "command": "tategaki.reload",
+        "title": "Reload Tategaki Editor",
+        "icon": "$(refresh)",
+        "category": "Tategaki"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "tategaki.openVerticalView",
+          "when": "resourceExtname == .txt",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "tategaki.openVerticalView",
+          "group": "navigation"
+        }
+      ],
+      "webview/title": [
+        {
+          "command": "tategaki.save",
+          "group": "navigation"
+        },
+        {
+          "command": "tategaki.reload",
+          "group": "navigation"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "tategaki.openVerticalView",
+          "when": "resourceExtname == .txt",
+          "group": "navigation"
+        },
+        {
+          "command": "tategaki.save",
+          "when": "activeWebviewPanelId == 'tategakiView'",
+          "group": "navigation"
+        },
+        {
+          "command": "tategaki.reload",
+          "when": "activeWebviewPanelId == 'tategakiView'",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile && npm run build:webview",
+    "compile": "tsc -p ./",
+    "build:webview": "vite build",
+    "watch": "concurrently \"tsc -watch -p ./\" \"vite build --watch\"",
+    "watch:webview": "vite build --watch",
+    "pretest": "npm run compile && npm run build:webview && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test:jest": "jest",
+    "test:jest:watch": "jest --watch",
+    "test:jest:coverage": "jest --coverage"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/preact": "^3.2.4",
+    "@types/jest": "^30.0.0",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vscode/test-electron": "^2.3.0",
+    "concurrently": "^9.2.0",
+    "eslint": "^8.0.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^30.0.4",
+    "jest-environment-jsdom": "^30.0.4",
+    "jsdom": "^26.1.0",
+    "mocha": "^10.0.0",
+    "preact": "^10.26.9",
+    "ts-jest": "^29.4.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.0.0",
+    "vite": "^7.0.0",
+    "vite-plugin-preact": "^0.2.1"
+  }
+}
