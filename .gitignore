@@ -1,0 +1,8 @@
+.DS_Store
+node_modules
+out
+webview-dist
+coverage
+*.vsix
+.claude/settings.local.json
+CLAUDE.local.md

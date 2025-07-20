@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",    
+    "module": "nodenext",
+    "target": "es2020",
+    "outDir": "out",
+    "lib": [
+      "ES2020"
+    ],
+    "sourceMap": true,
+    "rootDir": ".",
+    "strict": true,
+    "skipLibCheck": true,
+    "moduleResolution": "nodenext",
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+    },
+  "exclude": [
+    "node_modules",
+    ".vscode-test",
+    "webview-src",
+    "webview-dist"
+  ]
+}

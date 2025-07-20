@@ -1,0 +1,120 @@
+:root {
+  --line-height: 1.8em;
+  --font-size: 16px;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: 'Yu Mincho', 'MS Mincho', serif;
+  background-color: #f5f5dc;
+  height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.tategaki-app {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.indicator-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
+.save-indicator {
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 3px;
+  font-size: 12px;
+  border: 1px solid #ddd;
+  transition: color 0.2s ease;
+  margin-bottom: 5px;
+}
+
+.tate-chu-yoko-help {
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 3px;
+  font-size: 12px;
+  border: 1px solid #ddd;
+  color: #666;
+}
+
+.vertical-text-container {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  height: calc(100vh - 20px - 2.5em);
+  width: max-content;
+  overflow-x: auto;  
+  min-width: var(--line-height);
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  padding: 20px;
+  line-height: var(--line-height);
+  font-size: var(--font-size);
+  color: #333;
+  white-space: pre-wrap;
+  outline: none;
+  /* min-height: calc(100vh - 20px); */
+  caret-color: #333;
+}
+
+.vertical-text-container:focus {
+  background-color: #fafafa;
+}
+
+.column {
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
+  width: auto;
+  margin-right: 40px;
+  overflow-wrap: break-word;
+}
+
+.paragraph {
+  margin-bottom: 1em;
+  min-height: 1em;
+}
+
+.paragraph:empty::before {
+  content: "\00a0";
+  color: transparent;
+}
+
+/* 縦中横 */
+.tate-chu-yoko {
+  text-combine-upright: all;
+  -webkit-text-combine: horizontal;
+  -ms-text-combine-horizontal: all;
+  text-orientation: mixed;
+  /* background-color: rgba(0, 123, 255, 0.1); */
+  border-radius: 2px;
+  padding: 1px 2px;
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+/* スクロールバーのスタイリング */
+body::-webkit-scrollbar {
+  height: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
