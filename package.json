@@ -1,7 +1,7 @@
 {
   "name": "vertedit",
   "displayName": "VertEdit",
-  "description": "A VS Code extention for WYSIWYG vertical text editing",
+  "description": "A VS Code extension for WYSIWYG vertical text editing",
   "version": "0.1.0",
   "publisher": "k.rainfield",
   "license": "MIT",

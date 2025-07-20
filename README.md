@@ -1,4 +1,4 @@
-# VertEdit - VS Code extention for WYSIWYG vertical text editing
+# VertEdit - VS Code extension for WYSIWYG vertical text editing
 
 A VS Code extension that provides WYSIWYG vertical text editing.
 This tool is intended for writing novels in the traditional Japanese style known as tategaki (縦書き).
