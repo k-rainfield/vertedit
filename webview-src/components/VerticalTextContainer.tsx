@@ -1,5 +1,5 @@
 /** @jsxImportSource preact */
-import { useRef, useEffect, useCallback } from 'preact/hooks';
+import { useRef, useEffect} from 'preact/hooks';
 import { processTextForVerticalDisplay } from './processTextForVerticalDisplay';
 
 interface VerticalTextContainerProps {

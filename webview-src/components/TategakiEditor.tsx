@@ -8,13 +8,14 @@ interface TategakiEditorProps {
 }
 
 // VS Code API
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const acquireVsCodeApi: () => any;
 
 export const TategakiEditor = ({ initialContent }: TategakiEditorProps) => {
   const [content, setContent] = useState(initialContent);
-  const [isModified, setIsModified] = useState(false);
+  const [, setIsModified] = useState(false);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'unsaved' | 'saving' | 'saved' | 'error'>('idle');
-  const vscodeApiRef = useRef<any>();
+  const vscodeApiRef = useRef<ReturnType<typeof acquireVsCodeApi> | undefined>();
 
   // Initialize VS Code API
   useEffect(() => {
