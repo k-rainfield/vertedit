@@ -106,4 +106,40 @@ describe('Tate-chu-yoko conversion', () => {
       });
     });
   });
+
+  describe('Given: text with space-only lines', () => {
+    describe('When: processTextForVerticalDisplay is called', () => {
+      test('Then: space-only lines preserve their spaces', () => {
+        // Given
+        const givenText = '第1行目\n \n第3行目';
+        // When
+        const result = processTextForVerticalDisplay(givenText);
+        // Then
+        expect(result).toContain('<div class="paragraph"> </div>');
+        expect(result).not.toContain('<div class="paragraph"><br></div>');
+        const paragraphMatches = result.match(/<div class="paragraph">/g);
+        expect(paragraphMatches).toHaveLength(3);
+      });
+
+      test('Then: multiple space lines preserve their spaces', () => {
+        // Given
+        const givenText = '第1行目\n  \n第3行目';
+        // When
+        const result = processTextForVerticalDisplay(givenText);
+        // Then
+        expect(result).toContain('<div class="paragraph">  </div>');
+        expect(result).not.toContain('<div class="paragraph"><br></div>');
+      });
+
+      test('Then: full-width space lines preserve their spaces', () => {
+        // Given
+        const givenText = '第1行目\n　\n第3行目';
+        // When
+        const result = processTextForVerticalDisplay(givenText);
+        // Then
+        expect(result).toContain('<div class="paragraph">　</div>');
+        expect(result).not.toContain('<div class="paragraph"><br></div>');
+      });
+    });
+  });
 });
