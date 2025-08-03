@@ -5,4 +5,5 @@ webview-dist
 coverage
 *.vsix
 .claude/settings.local.json
+.github/instructions/local.instructions.md
 CLAUDE.local.md
