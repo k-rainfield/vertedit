@@ -17,6 +17,6 @@ export const processTextForVerticalDisplay = (text: string): string => {
 
   return replaced
     .split('\n')
-    .map(line => line.trim() === '' ? '<div class="paragraph"><br></div>' : `<div class="paragraph">${line}</div>`)
+    .map(line => line === '' ? '<div class="paragraph"><br></div>' : `<div class="paragraph">${line}</div>`)
     .join('');
 };

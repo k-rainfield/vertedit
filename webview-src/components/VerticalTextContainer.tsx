@@ -32,6 +32,7 @@ export const VerticalTextContainer = ({ content, onContentChange }: VerticalText
         if (p.innerHTML === '<br>' || p.innerHTML === '<br/>' || p.innerHTML === '<br />') {
           plainText += '';
         } else {
+          // Use textContent to preserve spaces
           plainText += p.textContent || '';
         }
       });
