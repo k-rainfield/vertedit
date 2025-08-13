@@ -93,6 +93,7 @@
   "scripts": {
     "vscode:prepublish": "npm run compile && npm run build:webview",
     "compile": "tsc -p ./",
+    "build": "npm run compile && vite build",
     "build:webview": "vite build",
     "watch": "concurrently \"tsc -watch -p ./\" \"vite build --watch\"",
     "watch:webview": "vite build --watch",

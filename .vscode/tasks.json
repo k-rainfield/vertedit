@@ -15,10 +15,10 @@
         },
         {
             "type": "npm",
-            "script": "build:webview",
+            "script": "build",
             "group": "build",
             "problemMatcher": [],
-            "label": "npm: build:webview",
+            "label": "npm: build",
             "detail": "vite build"
         }
     ]
