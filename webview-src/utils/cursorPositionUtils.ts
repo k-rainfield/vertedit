@@ -65,11 +65,15 @@ export const mergeCurrentLineWithPrevious = (
   const previousParagraph = currentParagraph?.previousElementSibling as HTMLElement;
   
   if (previousParagraph && currentParagraph) {
-    const isEmpty = previousParagraph.innerHTML.trim() === '<br>' || 
+    const isPreviousParagraphEmpty = previousParagraph.innerHTML.trim() === '<br>' || 
                    previousParagraph.innerHTML.trim() === '<br/>' || 
                    previousParagraph.innerHTML.trim() === '<br />';
-    
-    if (isEmpty) {
+
+    const isCurrentParagraphEmpty = currentParagraph.innerHTML.trim() === '<br>' || 
+                   currentParagraph.innerHTML.trim() === '<br/>' || 
+                   currentParagraph.innerHTML.trim() === '<br />';
+
+    if (isPreviousParagraphEmpty) {
       previousParagraph.innerHTML = '';
       while (currentParagraph.firstChild) {
         previousParagraph.appendChild(currentParagraph.firstChild);
@@ -92,8 +96,12 @@ export const mergeCurrentLineWithPrevious = (
       selection?.addRange(newRange);
     } else {
       const originalTextLength = previousParagraph.textContent?.length || 0;
-      while (currentParagraph.firstChild) {
-        previousParagraph.appendChild(currentParagraph.firstChild);
+      if (isCurrentParagraphEmpty) {
+        // no-op
+      } else {
+        while (currentParagraph.firstChild) {
+          previousParagraph.appendChild(currentParagraph.firstChild);
+        }
       }
       const cursorPos = findTextCursorPosition(previousParagraph, originalTextLength);
       const newRange = document.createRange();
