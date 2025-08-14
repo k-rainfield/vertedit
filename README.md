@@ -19,7 +19,7 @@ Useful for writing Japanese novels and literature!
 3. Run `npx vsce package` to create VSIX file
 4. Install VSIX file
     ```
-    code --install-extension vertedit-0.1.1.vsix
+    code --install-extension vertedit-0.1.2.vsix
     ```
 
 ## License
