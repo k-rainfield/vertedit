@@ -16,7 +16,7 @@ export const processTextForVerticalDisplay = (text: string): string => {
   });
 
   return replaced
-    .split('\n')
+    .split(/\r?\n/)
     .map(line => line === '' ? '<div class="paragraph"><br></div>' : `<div class="paragraph">${line}</div>`)
     .join('');
 };
