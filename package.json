@@ -2,14 +2,13 @@
   "name": "vertedit",
   "displayName": "VertEdit",
   "description": "A VS Code extension for WYSIWYG vertical text editing",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "publisher": "k.rainfield",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/k-rainfield/vertedit.git"
   },
-
   "engines": {
     "vscode": "^1.74.0"
   },
@@ -25,7 +24,7 @@
   "main": "./out/extension.js",
   "activationEvents": [
     "onLanguage:plaintext"
-  ],  
+  ],
   "contributes": {
     "commands": [
       {
