@@ -142,4 +142,39 @@ describe('Tate-chu-yoko conversion', () => {
       });
     });
   });
+
+  describe('Given: text with CRLF line endings', () => {
+    describe('When: processTextForVerticalDisplay is called', () => {
+      test('Then: CRLF lines produce the same result as LF lines', () => {
+        // Given
+        const lfText = '第1行目\n第2行目\n第3行目';
+        const crlfText = '第1行目\r\n第2行目\r\n第3行目';
+        // When
+        const lfResult = processTextForVerticalDisplay(lfText);
+        const crlfResult = processTextForVerticalDisplay(crlfText);
+        // Then
+        expect(crlfResult).toBe(lfResult);
+      });
+
+      test('Then: CRLF empty lines are represented by br tag', () => {
+        // Given
+        const givenText = '第1行目\r\n\r\n第3行目';
+        // When
+        const result = processTextForVerticalDisplay(givenText);
+        // Then
+        expect(result).toContain('<div class="paragraph"><br></div>');
+        const paragraphMatches = result.match(/<div class="paragraph">/g);
+        expect(paragraphMatches).toHaveLength(3);
+      });
+
+      test('Then: CRLF lines do not leave \\r in paragraph content', () => {
+        // Given
+        const givenText = '第1行目\r\n第2行目\r\n';
+        // When
+        const result = processTextForVerticalDisplay(givenText);
+        // Then
+        expect(result).not.toContain('\r');
+      });
+    });
+  });
 });
