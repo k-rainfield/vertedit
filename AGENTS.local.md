@@ -30,9 +30,6 @@ tategaki-editor/
 
 1. **TypeScript使用必須** - 全てのコードはTypeScriptで記述
 2. **コメント禁止** - ユーザーが明示的に要求しない限りコメントを追加しない
-3. **Preact使用** - WebviewのUIはPreactで実装（ReactではなくPreact）
-4. **HTM使用** - JSXの代わりにHTMライブラリを使用してhtml``記法で記述
-
 
 ### 機能実装の原則
 1. **最小限の実装** - 明示的に指示された機能のみを実装する
@@ -76,6 +73,7 @@ tategaki-editor/
    - クロスブラウザ対応のため複数プロパティを併用
 
 ## 開発ワークフロー
+- テストファーストで実装し、実装前にテストが失敗することを確認する
 
 ### ビルドコマンド
 
@@ -117,13 +115,12 @@ VS Code組み込みアイコン（Codicons）のみ使用可能：
 ### 依存関係
 
 - **実行時**: VS Code API
-- **開発時**: TypeScript, Vite, Preact, HTM, ESLint
+- **開発時**: TypeScript, Vite, ESLint
 
 ## テスト方針
 
-1. **拡張機能テスト** - VS Code Extension Test Runner使用
+1. **単体テスト** - jestをVS codeのテストランナーから実行
 2. **手動テスト** - F5デバッグ起動での動作確認
-3. **ビルドテスト** - npm run pretest でリント+ビルド確認
 
 ## 注意事項
 
