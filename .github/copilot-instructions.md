@@ -1,3 +1,3 @@
-When writing test code in this repository, follow these rules:
-- Write comments and explanations in English.
-- Use the Given-When-Then pattern for clarity.
+see below files at the root of the repository:
+- `CLAUED.local.md`
+- `CLAUED.md`
