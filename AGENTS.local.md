@@ -10,8 +10,7 @@ VS Code拡張機能として実装された日本語縦書きWYSIWYGエディタ
 tategaki-editor/
 ├── src/                     # VS Code拡張機能のメインコード
 │   ├── extension.ts         # 拡張機能のエントリーポイント
-│   ├── tategakiViewProvider.ts # Webviewプロバイダー
-│   └── test/               # テストファイル
+│   └── tategakiViewProvider.ts # Webviewプロバイダー
 ├── webview-src/            # Webview用フロントエンドコード
 │   ├── components/         # Preactコンポーネント
 │   │   ├── TategakiEditor.tsx        # メインエディタコンポーネント
@@ -20,6 +19,7 @@ tategaki-editor/
 │   ├── main.tsx            # Webviewエントリーポイント
 │   └── styles.css          # CSS定義
 ├── webview-dist/           # ビルド済みWebviewファイル
+├── webview-test/           # Webviewテストファイル
 ├── out/                    # コンパイル済みTypeScript
 └── package.json            # 拡張機能設定とメニュー定義
 ```
@@ -81,7 +81,7 @@ npm run compile           # TypeScriptコンパイル
 npm run build:webview     # Webviewビルド
 npm run watch            # 両方を監視モードで実行
 npm run lint             # ESLintチェック
-npm run test             # テスト実行
+npm run test:jest        # テスト実行
 ```
 
 ### 必須ビルド手順
