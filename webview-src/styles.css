@@ -65,6 +65,10 @@ body {
   caret-color: #333;
 }
 
+.vertical-text-container.wrapped {
+  height: calc((var(--word-wrap-column) + 1) * 1em);
+}
+
 .vertical-text-container:focus {
   background-color: #fafafa;
 }

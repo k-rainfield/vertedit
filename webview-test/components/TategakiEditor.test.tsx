@@ -98,4 +98,38 @@ describe('TategakiEditor', () => {
     // Then: postMessageが呼ばれる
     expect(postMessageMock).toHaveBeenCalledWith({ command: 'save', content: 'テスト' });
   });
+
+  it('should apply wrapped height when updateWordWrapColumn message is received', () => {
+    // Given: editor starts without wrap column
+    render(<TategakiEditor initialContent="テスト" wordWrapColumn={null} />);
+    const editableDiv = document.querySelector('.vertical-text-container') as HTMLDivElement;
+    expect(editableDiv).not.toHaveClass('wrapped');
+
+    // When: webview receives updateWordWrapColumn with a positive number
+    act(() => {
+      window.dispatchEvent(new MessageEvent('message', { data: { command: 'updateWordWrapColumn', wordWrapColumn: 40 } }));
+    });
+
+    // Then: wrapped class and CSS variable are applied
+    const updatedDiv = document.querySelector('.vertical-text-container') as HTMLDivElement;
+    expect(updatedDiv).toHaveClass('wrapped');
+    expect(updatedDiv.style.getPropertyValue('--word-wrap-column')).toBe('40');
+  });
+
+  it('should clear wrapped height when updateWordWrapColumn is set to null', () => {
+    // Given: editor starts with wrap column applied
+    render(<TategakiEditor initialContent="テスト" wordWrapColumn={30} />);
+    const editableDiv = document.querySelector('.vertical-text-container') as HTMLDivElement;
+    expect(editableDiv).toHaveClass('wrapped');
+
+    // When: webview receives updateWordWrapColumn with null
+    act(() => {
+      window.dispatchEvent(new MessageEvent('message', { data: { command: 'updateWordWrapColumn', wordWrapColumn: null } }));
+    });
+
+    // Then: wrapped class is removed and custom property is cleared
+    const updatedDiv = document.querySelector('.vertical-text-container') as HTMLDivElement;
+    expect(updatedDiv).not.toHaveClass('wrapped');
+    expect(updatedDiv.style.getPropertyValue('--word-wrap-column')).toBe('');
+  });
 });

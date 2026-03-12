@@ -6,9 +6,10 @@ import { checkIfAtLineStart, mergeCurrentLineWithPrevious } from '../utils/curso
 interface VerticalTextContainerProps {
   content: string;
   onContentChange: (content: string) => void;
+  wordWrapColumn?: number | null;
 }
 
-export const VerticalTextContainer = ({ content, onContentChange }: VerticalTextContainerProps) => {
+export const VerticalTextContainer = ({ content, onContentChange, wordWrapColumn = null }: VerticalTextContainerProps) => {
   const editorRef = useRef<HTMLDivElement>(null);
 
   // Convert HTML back to plain text
@@ -83,7 +84,8 @@ export const VerticalTextContainer = ({ content, onContentChange }: VerticalText
   return (
     <div
       ref={editorRef}
-      className="vertical-text-container"
+      className={wordWrapColumn === null ? 'vertical-text-container' : 'vertical-text-container wrapped'}
+      style={wordWrapColumn === null ? undefined : { '--word-wrap-column': String(wordWrapColumn) }}
       contentEditable={true}
       onInput={handleInput}
       onKeyDown={handleKeyDown}

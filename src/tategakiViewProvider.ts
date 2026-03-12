@@ -1,10 +1,9 @@
 import * as vscode from 'vscode';
-import * as path from 'path';
 
 export class TategakiViewProvider {
     constructor(private readonly _extensionUri: vscode.Uri) {}
 
-    public getWebviewContent(text: string, webview: vscode.Webview): string {
+    public getWebviewContent(text: string, webview: vscode.Webview, wordWrapColumn: number | null): string {
         // Get paths to the built assets
         const webviewDistPath = vscode.Uri.joinPath(this._extensionUri, 'webview-dist');
         const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(webviewDistPath, 'webview.js'));
@@ -28,6 +27,7 @@ export class TategakiViewProvider {
     <script nonce="${nonce}">
         // Set initial content for the Preact app
         window.initialContent = ${JSON.stringify(text)};
+        window.wordWrapColumn = ${JSON.stringify(wordWrapColumn)};
     </script>
     <script type="module" nonce="${nonce}" src="${scriptUri}"></script>
 </body>

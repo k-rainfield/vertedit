@@ -5,6 +5,18 @@ export function activate(context: vscode.ExtensionContext) {
     const provider = new TategakiViewProvider(context.extensionUri);
     let currentPanel: vscode.WebviewPanel | undefined;
     let currentDocument: vscode.TextDocument | undefined;
+
+    const getWordWrapColumn = (): number | null => {
+        const vertEditValue = vscode.workspace.getConfiguration('VertEdit').get<number | null>('wordWrapColumn', null);
+        const configuredValue = vertEditValue ?? vscode.workspace.getConfiguration('tategaki').get<number | null>('wordWrapColumn', null);
+        if (configuredValue === null) {
+            return null;
+        }
+        if (!Number.isFinite(configuredValue) || configuredValue < 1) {
+            return null;
+        }
+        return Math.floor(configuredValue);
+    };
     
     const openVerticalViewDisposable = vscode.commands.registerCommand('tategaki.openVerticalView', async () => {
         const activeEditor = vscode.window.activeTextEditor;
@@ -25,12 +37,13 @@ export function activate(context: vscode.ExtensionContext) {
 
         const document = activeEditor.document;
         const text = document.getText();
+        const wordWrapColumn = getWordWrapColumn();
         
         // Store references for the save command
         currentPanel = panel;
         currentDocument = document;
         
-        panel.webview.html = provider.getWebviewContent(text, panel.webview);
+        panel.webview.html = provider.getWebviewContent(text, panel.webview, wordWrapColumn);
         
         // Handle messages from the webview
         panel.webview.onDidReceiveMessage(
@@ -104,14 +117,28 @@ export function activate(context: vscode.ExtensionContext) {
         if (currentPanel && currentDocument) {
             // Reload webview content with current document content
             const text = currentDocument.getText();
-            currentPanel.webview.html = provider.getWebviewContent(text, currentPanel.webview);
+            const wordWrapColumn = getWordWrapColumn();
+            currentPanel.webview.html = provider.getWebviewContent(text, currentPanel.webview, wordWrapColumn);
             vscode.window.showInformationMessage('縦書きエディタをリロードしました');
         } else {
             vscode.window.showErrorMessage('縦書きエディタが開いていません');
         }
     });
 
-    context.subscriptions.push(openVerticalViewDisposable, saveDisposable, reloadDisposable);
+    const configurationChangeDisposable = vscode.workspace.onDidChangeConfiguration(event => {
+        if (!event.affectsConfiguration('VertEdit.wordWrapColumn') && !event.affectsConfiguration('tategaki.wordWrapColumn')) {
+            return;
+        }
+        if (!currentPanel) {
+            return;
+        }
+        currentPanel.webview.postMessage({
+            command: 'updateWordWrapColumn',
+            wordWrapColumn: getWordWrapColumn()
+        });
+    });
+
+    context.subscriptions.push(openVerticalViewDisposable, saveDisposable, reloadDisposable, configurationChangeDisposable);
 }
 
 export function deactivate() {}

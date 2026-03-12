@@ -5,14 +5,16 @@ import { VerticalTextContainer } from './VerticalTextContainer';
 
 interface TategakiEditorProps {
   initialContent: string;
+  wordWrapColumn?: number | null;
 }
 
 // VS Code API
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const acquireVsCodeApi: () => any;
 
-export const TategakiEditor = ({ initialContent }: TategakiEditorProps) => {
+export const TategakiEditor = ({ initialContent, wordWrapColumn = null }: TategakiEditorProps) => {
   const [content, setContent] = useState(initialContent);
+  const [currentWordWrapColumn, setCurrentWordWrapColumn] = useState<number | null>(wordWrapColumn);
   const [, setIsModified] = useState(false);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'unsaved' | 'saving' | 'saved' | 'error'>('idle');
   const vscodeApiRef = useRef<ReturnType<typeof acquireVsCodeApi> | undefined>();
@@ -34,12 +36,29 @@ export const TategakiEditor = ({ initialContent }: TategakiEditorProps) => {
             setTimeout(() => setSaveStatus('idle'), 2000);
           }
           break;
+        case 'updateWordWrapColumn':
+          if (message.wordWrapColumn === null) {
+            setCurrentWordWrapColumn(null);
+            break;
+          }
+          if (
+            typeof message.wordWrapColumn === 'number' &&
+            Number.isFinite(message.wordWrapColumn) &&
+            message.wordWrapColumn > 0
+          ) {
+            setCurrentWordWrapColumn(Math.floor(message.wordWrapColumn));
+          }
+          break;
       }
     };
 
     window.addEventListener('message', messageListener);
     return () => window.removeEventListener('message', messageListener);
   }, []);
+
+  useEffect(() => {
+    setCurrentWordWrapColumn(wordWrapColumn);
+  }, [wordWrapColumn]);
 
   // Handle content changes
   const handleContentChange = (newContent: string) => {
@@ -81,6 +100,7 @@ export const TategakiEditor = ({ initialContent }: TategakiEditorProps) => {
       <VerticalTextContainer 
         content={content}
         onContentChange={handleContentChange}
+        wordWrapColumn={currentWordWrapColumn}
       />
     </div>
   );

@@ -21,11 +21,25 @@
     "wysiwyg",
     "editor"
   ],
-  "main": "./out/extension.js",
+  "main": "./out/src/extension.js",
   "activationEvents": [
     "onLanguage:plaintext"
   ],
   "contributes": {
+    "configuration": {
+      "title": "VertEdit",
+      "properties": {
+        "VertEdit.wordWrapColumn": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "default": null,
+          "minimum": 1,
+          "description": "Wrap column for the vertical editor. When null, the editor uses full viewport height."
+        }
+      }
+    },
     "commands": [
       {
         "command": "tategaki.openVerticalView",

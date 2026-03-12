@@ -1,7 +1,7 @@
 import { h } from 'preact';
 /** @jsxImportSource preact */
 import { render, screen } from '@testing-library/preact';
-import { SaveIndicator } from '../../webview-src/components/SaveIndicator.tsx';
+import { SaveIndicator } from '../../webview-src/components/SaveIndicator';
 
 describe('SaveIndicator', () => {
   test('shows "未保存" and unsaved color', () => {
