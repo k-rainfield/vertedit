@@ -13,8 +13,8 @@
     "strict": true,
     "skipLibCheck": true,
     "moduleResolution": "nodenext",
-    "allowImportingTsExtensions": true,
-    "noEmit": true
+    // "allowImportingTsExtensions": true,
+    "noEmit": false
     },
   "exclude": [
     "node_modules",

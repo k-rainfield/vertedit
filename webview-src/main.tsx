@@ -7,11 +7,17 @@ import './styles.css';
 declare global {
   interface Window {
     initialContent: string;
+    wordWrapColumn: number | null;
   }
 }
 
 const App = () => {
-  return <TategakiEditor initialContent={window.initialContent || ''} />;
+  return (
+    <TategakiEditor
+      initialContent={window.initialContent || ''}
+      wordWrapColumn={window.wordWrapColumn ?? null}
+    />
+  );
 };
 
 render(<App />, document.getElementById('root')!);
