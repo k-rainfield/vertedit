@@ -7,3 +7,4 @@ coverage
 .claude/settings.local.json
 .github/instructions/local.instructions.md
 CLAUDE.local.md
+local
