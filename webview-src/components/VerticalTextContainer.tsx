@@ -76,7 +76,8 @@ export const VerticalTextContainer = ({ content, onContentChange, wordWrapColumn
     if (editorRef.current) {
       const processedContent = processTextForVerticalDisplay(content);
       if (editorRef.current.innerHTML !== processedContent) {
-        editorRef.current.innerHTML = processedContent;
+        console.log('innerHTML diff detectied');
+        // editorRef.current.innerHTML = processedContent;
       }
     }
   }, [content]);
